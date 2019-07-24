@@ -11,3 +11,5 @@ https.createServer(options, function (req, res) {
   res.writeHead(200);
   res.end('THANK YOU FOR PLAYING ❤️\n');
 }).listen(5000);
+
+console.log('Server started on https://localhost:5000');
