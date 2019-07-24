@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# From https://github.com/thojansen/client-certificates/blob/master/ssl/setup.sh
+# create self-signed-root-ca certificate
+openssl genrsa -out ssl/self-signed-root-ca.key 2048
+
+openssl req -x509 -new -nodes -key ssl/self-signed-root-ca.key -days 1024 -out ssl/self-signed-root-ca.crt -subj "/C=DE/ST=Germany/L=Walldorf/O=SAP SE/OU=Tools/CN=self-signed-root-ca"
+
+# create server key and certificate
+openssl genrsa -out ssl/server.key 2048
+
+openssl req -new -key ssl/server.key -out ssl/server.csr -subj "/C=DE/ST=Germany/L=Walldorf/O=SAP SE/OU=Tools/CN=localhost"
+
+openssl x509 -req -in ssl/server.csr -CA ssl/self-signed-root-ca.crt -CAkey ssl/self-signed-root-ca.key -CAcreateserial -out ssl/server.crt -days 500

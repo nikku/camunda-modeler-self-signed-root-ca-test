@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo trust anchor --verbose --remove ./ssl/self-signed-root-ca.crt
